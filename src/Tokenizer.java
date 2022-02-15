@@ -1,8 +1,10 @@
+
 import java.util.*;
 
 public class Tokenizer {
     protected String src;
     private String next;
+    public boolean hasNext;
     private int pos;
 
     private final List<String> terminalSymbol = new ArrayList<>(Arrays.asList
@@ -17,6 +19,7 @@ public class Tokenizer {
     public Tokenizer(String src){
         this.src = src;
         pos = 0;
+        hasNext = true;
         
         computeNext();
     }
@@ -49,7 +52,7 @@ public class Tokenizer {
                 
             }else{
                 s.append(c);
-                for (pos++; pos < src.length() && !Character.toString(src.charAt(pos)).equals(" "); pos++)
+                for (pos++; pos < src.length() && !isSpace(src.charAt(pos)); pos++)
                     s.append(src.charAt(pos));
 
                 if(!terminalSymbol.contains(s.toString())){    //need to check for identifier later
@@ -58,12 +61,14 @@ public class Tokenizer {
             }
             next = s.toString();
 
-        }else
+        }else {
             next = "";
+            hasNext = false;
+        }
     }
 
     private boolean isSpace(char c) {
-        return String.valueOf(c).equals(" ");
+        return String.valueOf(c).equals(" ") || String.valueOf(c).equals("\n");
     }
 
     private boolean isNumber(char s){
@@ -87,7 +92,8 @@ public class Tokenizer {
     }
 
     public void consume() {
-        computeNext();
+        if(hasNext)
+            computeNext();
     }
 
 }
