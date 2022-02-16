@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -76,7 +76,6 @@ class WhileStatement implements Statement{
         }
     }
 }
-
 
 class BlockStatement implements Statement{
     private List<Statement> list;
