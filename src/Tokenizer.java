@@ -7,14 +7,8 @@ public class Tokenizer {
     public boolean hasNext;
     private int pos;
 
-    private final List<String> terminalSymbol = new ArrayList<>(Arrays.asList
-        ("antibody", "down", "downleft", "downright", "else"
-                , "if", "left", "move", "nearby", "right", "shoot", "then", "up"
-                , "upleft", "upright", "virus", "while"));
-
     private final List<String> operators = new ArrayList<>(Arrays.asList
         ("+", "-", "*", "/", "%", "^", "(", ")", "{", "}"));
-        
 
     public Tokenizer(String src){
         this.src = src;
@@ -55,9 +49,6 @@ public class Tokenizer {
                 for (pos++; pos < src.length() && !isSpace(src.charAt(pos)); pos++)
                     s.append(src.charAt(pos));
 
-                if(!terminalSymbol.contains(s.toString())){    //need to check for identifier later
-                    // throw the token is neither terminalSymbol nor identifier
-                }
             }
             next = s.toString();
 
