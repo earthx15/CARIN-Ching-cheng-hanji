@@ -6,23 +6,23 @@ interface Statement{
 }
 
 class IfStatement implements Statement{
-    private Expression cause;
+    private Expression expr;
     private Statement trueStatement;
     private Statement falseStatement;
 
-    public IfStatement(Expression cause, Statement ts){
-        this.cause = cause;
+    public IfStatement(Expression expr, Statement ts){
+        this.expr = expr;
         this.trueStatement = ts;
     }
 
-    public IfStatement(Expression cause, Statement ts, Statement fs){
-        this(cause, ts);
+    public IfStatement(Expression expr, Statement ts, Statement fs){
+        this(expr, ts);
         this.falseStatement = fs;
     }
 
     @Override
     public void eval() {
-        if(cause.eval() != 0)
+        if(expr.eval() != 0)
             trueStatement.eval();
         else
             falseStatement.eval();
@@ -30,18 +30,18 @@ class IfStatement implements Statement{
 }
 
 class WhileStatement implements Statement{
-    private Expression cause;
+    private Expression expr;
     private Statement stm;
 
 
-    public WhileStatement(Expression cause, Statement stm) {
-        this.cause = cause;
+    public WhileStatement(Expression expr, Statement stm) {
+        this.expr = expr;
         this.stm = stm;
     }
 
     @Override
     public void eval() {
-        for(int i = 0; i < 1000 && cause.eval() > 0; i++){
+        for(int i = 0; i < 1000 && expr.eval() > 0; i++){
             stm.eval();
         }
     }
