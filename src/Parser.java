@@ -106,6 +106,31 @@ class AssignmentStatement implements Statement{
     }
 }
 
+class AttackCommand implements Statement{
+    private Direction direction;
+
+    public AttackCommand(Direction direction){
+        this.direction = direction;
+    }
+
+    @Override
+    public void eval() {
+        // attack
+    }
+}
+
+class Direction{
+    private final String direction;
+
+    public Direction(String direction){
+        this.direction = direction;
+    }
+
+    public String eval(){
+        return direction;
+    }
+}
+
 class Expression{
 
     int eval(){
