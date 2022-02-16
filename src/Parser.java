@@ -29,6 +29,24 @@ class IfStatement implements Statement{
     }
 }
 
+class WhileStatement implements Statement{
+    private Expression cause;
+    private Statement stm;
+
+
+    public WhileStatement(Expression cause, Statement stm) {
+        this.cause = cause;
+        this.stm = stm;
+    }
+
+    @Override
+    public void eval() {
+        for(int i = 0; i < 1000 && cause.eval() > 0; i++){
+            stm.eval();
+        }
+    }
+}
+
 
 class BlockStatement implements Statement{
     private List<Statement> list;
