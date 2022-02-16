@@ -73,5 +73,16 @@ class Expression{
 
 
 public class Parser {
-    
+
+    protected Tokenizer tkz;
+    public Map<String, Integer> sampleStorage;
+
+    public Parser(String src) {
+        this.tkz = new Tokenizer(src);
+        sampleStorage.put("a", 0);
+        sampleStorage.put("b", 0);
+        sampleStorage.put("c", 0);
+    }
+
+
 }
