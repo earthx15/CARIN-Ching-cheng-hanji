@@ -203,7 +203,7 @@ class SensorExpression implements Expression{
 public class Parser {
 
     protected Tokenizer tkz;
-    public Map<String, Integer> sampleStorage;
+    public Map<String, Integer> sampleStorage = new HashMap<>();
 
     public Parser(String src) {
         this.tkz = new Tokenizer(src);
