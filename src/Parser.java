@@ -8,30 +8,6 @@ interface Statement{
     void eval(Map<String, Integer> strg);
 }
 
-class IfStatement implements Statement{
-    private Expression expr;
-    private Statement trueStatement;
-    private Statement falseStatement;
-
-    public IfStatement(Expression expr, Statement ts){
-        this.expr = expr;
-        this.trueStatement = ts;
-    }
-
-    public IfStatement(Expression expr, Statement ts, Statement fs){
-        this(expr, ts);
-        this.falseStatement = fs;
-    }
-
-    @Override
-    public void eval() {
-        if(expr.eval() != 0)
-            trueStatement.eval();
-        else
-            falseStatement.eval();
-    }
-}
-
 class WhileStatement implements Statement{
     private Expression expr;
     private Statement stm;
