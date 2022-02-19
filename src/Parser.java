@@ -141,6 +141,19 @@ class AttackCommand implements Statement{
     }
 }
 
+class MoveCommand implements Statement{
+    private Direction direction;
+
+    public MoveCommand(Direction direction){
+        this.direction = direction;
+    }
+
+    @Override
+    public void eval(Map<String, Integer> strg) {
+        // move
+    }
+}
+
 class Direction{
     private final String direction;
 
