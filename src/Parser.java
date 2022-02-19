@@ -3,34 +3,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-class Identifier{
-    private final String name;
-    private int value = 0;
-
-    public Identifier(String name){
-        this.name = name;
-    }
-
-    int eval(Map<String, Integer> strg){
-        if(strg.containsKey(name)){
-            value = strg.get(name);
-            return value;
-        }else
-            return -1;
-            // throw undefined identifier
-    }
-
-    void assign(int evaluatedExpr){
-        value = evaluatedExpr;
-    }
-
-    void update(Map<String, Integer> strg){
-        if(strg.containsKey(name)){
-            strg.replace(name, value);
-        }
-//        else throw undefined identifier;
-    }
-}
 
 interface Statement{
     void eval(Map<String, Integer> strg);
