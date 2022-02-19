@@ -33,7 +33,7 @@ class Identifier{
 }
 
 interface Statement{
-    void eval();
+    void eval(Map<String, Integer> strg);
 }
 
 class IfStatement implements Statement{
@@ -71,9 +71,9 @@ class WhileStatement implements Statement{
     }
 
     @Override
-    public void eval() {
-        for(int i = 0; i < 1000 && expr.eval() > 0; i++){
-            stm.eval();
+    public void eval(Map<String, Integer> strg) {
+        for(int i = 0; i < 1000 && expr.eval(strg) > 0; i++){
+            stm.eval(strg);
         }
     }
 }
@@ -86,9 +86,9 @@ class BlockStatement implements Statement{
     }
 
     @Override
-    public void eval(){
+    public void eval(Map<String, Integer> strg){
         for(Statement s : list)
-            s.eval();
+            s.eval(strg);
     }
 }
 
@@ -123,8 +123,10 @@ class AssignmentStatement implements Statement{
     }
 
     @Override
-    public void eval() {
-        var.assign(expr.eval());
+    public void eval(Map<String, Integer> strg) {
+        var.assign(expr.eval(strg));
+        var.update(strg);
+        System.out.println(var.eval(strg));
     }
 }
 
@@ -136,7 +138,7 @@ class AttackCommand implements Statement{
     }
 
     @Override
-    public void eval() {
+    public void eval(Map<String, Integer> strg) {
         // attack
     }
 }
@@ -161,7 +163,7 @@ class Direction{
         this.direction = direction;
     }
 
-    public String eval(){
+    public String eval(Map<String, Integer> strg){
         return direction;
     }
 }
