@@ -168,11 +168,8 @@ class Direction{
     }
 }
 
-class Expression{
-
-    int eval(){
-        return 0;
-    }
+interface Expression{
+    int eval(Map<String, Integer> strg);
 }
 
 class Identifier implements Expression {
