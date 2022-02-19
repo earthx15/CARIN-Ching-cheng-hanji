@@ -139,7 +139,85 @@ class Expression{
     }
 }
 
+class Identifier implements Expression {
+    private final String name;
+    private int value = 0;
 
+    public Identifier(String name){
+        this.name = name;
+    }
+
+    public int eval(Map<String, Integer> strg){
+        if(strg.containsKey(name)){
+            value = strg.get(name);
+            return value;
+        }else{
+            strg.put(name, value);
+            return value;
+        }
+    }
+
+    void assign(int evaluatedExpr){
+        value = evaluatedExpr;
+    }
+
+    void update(Map<String, Integer> strg){
+        if(strg.containsKey(name)){
+            strg.replace(name, value);
+        }
+//        else throw cannot update to the undefined identifier;
+    }
+}
+
+
+class BinaryArithExpr implements Expression {
+    private Expression left;
+    private Expression right;
+    private String op;
+
+    public BinaryArithExpr(
+            Expression left, String op, Expression right) {
+        this.left = left;
+        this.op = op;
+        this.right = right;
+    }
+
+    @Override
+    public int eval(Map<String, Integer> strg) {
+        int lv = left.eval(strg);
+        int rv = right.eval(strg);
+
+        if (op.equals("+")) return lv + rv;
+        if (op.equals("-")) return lv - rv;
+        if (op.equals("*")) return lv * rv;
+        if (op.equals("/")) return lv / rv;
+        if (op.equals("%")) return lv % rv;
+        if (op.equals("^")) return (int) Math.pow(lv,rv);
+        else
+            return -1;  //throw undefined operator
+
+    }
+}
+
+class IntLit implements Expression{
+    private int val;
+    public IntLit(int val) {
+        this.val = val;
+    }
+
+
+    @Override
+    public int eval(Map<String, Integer> strg) {
+        return val;
+    }
+}
+
+class SensorExpression implements Expression{
+    @Override
+    public int eval(Map<String, Integer> strg) {
+        return 0;
+    }
+}
 
 public class Parser {
 
