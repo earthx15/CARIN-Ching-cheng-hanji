@@ -5,7 +5,7 @@ import java.util.Map;
 
 
 interface Statement{
-    void eval(Map<String, Integer> strg);
+    void eval(Map<String, Integer> strg) throws EvalError;
 }
 
 class WhileStatement implements Statement{
@@ -19,7 +19,7 @@ class WhileStatement implements Statement{
     }
 
     @Override
-    public void eval(Map<String, Integer> strg) {
+    public void eval(Map<String, Integer> strg) throws EvalError {
         for(int i = 0; i < 1000 && expr.eval(strg) > 0; i++){
             stm.eval(strg);
         }
@@ -34,7 +34,7 @@ class BlockStatement implements Statement{
     }
 
     @Override
-    public void eval(Map<String, Integer> strg){
+    public void eval(Map<String, Integer> strg) throws EvalError {
         for(Statement s : list)
             s.eval(strg);
     }
@@ -52,7 +52,7 @@ class IfStatement implements Statement {
     }
 
     @Override
-    public void eval(Map<String, Integer> strg) {
+    public void eval(Map<String, Integer> strg) throws EvalError {
         if (expr.eval(strg) != 0)
             trueStatement.eval(strg);
         else
@@ -71,10 +71,10 @@ class AssignmentStatement implements Statement{
     }
 
     @Override
-    public void eval(Map<String, Integer> strg) {
+    public void eval(Map<String, Integer> strg) throws EvalError {
         var.assign(expr.eval(strg));
         var.update(strg);
-        System.out.println(var.eval(strg));
+        System.out.println(var.name + " = " + var.eval(strg));
     }
 }
 
