@@ -117,13 +117,11 @@ class Direction{
 }
 
 interface Expression{
-    int eval(Map<String, Integer> strg) throws EvalError;
+    int eval(Map<String, Integer> strg);
 }
 
-
 class Identifier implements Expression {
-    //  dont forget to change this to private
-    public final String name;
+    private final String name;
     private int value = 0;
 
     public Identifier(String name){
@@ -145,8 +143,10 @@ class Identifier implements Expression {
     }
 
     void update(Map<String, Integer> strg){
-        strg.put(name, value);
-
+        if(strg.containsKey(name)){
+            strg.replace(name, value);
+        }
+//        else throw cannot update to the undefined identifier;
     }
 }
 
@@ -164,23 +164,18 @@ class BinaryArithExpr implements Expression {
     }
 
     @Override
-    public int eval(Map<String, Integer> strg) throws EvalError {
+    public int eval(Map<String, Integer> strg) {
         int lv = left.eval(strg);
         int rv = right.eval(strg);
 
-        try {
-            if (op.equals("+")) return lv + rv;
-            if (op.equals("-")) return lv - rv;
-            if (op.equals("*")) return lv * rv;
-            if (op.equals("/")) return lv / rv;
-            if (op.equals("%")) return lv % rv;
-            if (op.equals("^")) return (int) Math.pow(lv,rv);
-            else
-                throw new EvalError("undefined operator");
-        }catch (ArithmeticException | EvalError e){
-            throw new EvalError("Evaluating Error : " + e.getLocalizedMessage());
-        }
-
+        if (op.equals("+")) return lv + rv;
+        if (op.equals("-")) return lv - rv;
+        if (op.equals("*")) return lv * rv;
+        if (op.equals("/")) return lv / rv;
+        if (op.equals("%")) return lv % rv;
+        if (op.equals("^")) return (int) Math.pow(lv,rv);
+        else
+            return -1;  //throw undefined operator
 
     }
 }
@@ -212,9 +207,12 @@ public class Parser {
 
     public Parser(String src) {
         this.tkz = new Tokenizer(src);
+        sampleStorage.put("a", 0);
+        sampleStorage.put("b", 0);
+        sampleStorage.put("c", 0);
     }
 
-    public List<Statement> parseProgram() throws EvalError {
+    public List<Statement> parseProgram(){
         List<Statement> stmList = new LinkedList<>();
         while(tkz.hasNext){
             Statement stm = parseStm();
@@ -223,7 +221,7 @@ public class Parser {
         return stmList;
     }
 
-    public Statement parseStm() throws EvalError {
+    public Statement parseStm(){
         if(tkz.peek().equals("{")){
             return parseBlkStm();
         }else if(tkz.peek().equals("if")){
@@ -234,7 +232,7 @@ public class Parser {
             return parseCommand();
     }
 
-    public Statement parseBlkStm() throws EvalError {
+    public Statement parseBlkStm(){
         tkz.consume();      // consume {
         List<Statement> stmList = new LinkedList<>();
         while (!tkz.peek().equals("}")){
@@ -245,7 +243,7 @@ public class Parser {
         return new BlockStatement(stmList);
     }
 
-    public Statement parseIfStm() throws EvalError {
+    public Statement parseIfStm(){
         tkz.consume();      // consume if
         //check for (
         tkz.consume();      // consume (
@@ -267,7 +265,7 @@ public class Parser {
         return new IfStatement(expr, ts, fs);
     }
 
-    public Statement parseWhileStm() throws EvalError {
+    public Statement parseWhileStm(){
         tkz.consume();      // consume while
         //check for (
         tkz.consume();      // consume (
@@ -282,7 +280,7 @@ public class Parser {
         return new WhileStatement(expr, stm);
     }
 
-    public Statement parseAsgnStm() throws EvalError {
+    public Statement parseAsgnStm(){
         Identifier iden = new Identifier(tkz.peek());
         tkz.consume();      // consume identifier
         //check if next token is not expr
@@ -291,7 +289,7 @@ public class Parser {
         return new AssignmentStatement(iden, expr);
     }
 
-    public Statement parseCommand() throws EvalError {
+    public Statement parseCommand(){
         if(tkz.peek().equals("move")){
             tkz.consume();      // consume move
             Direction dir = parseDirection();
@@ -324,7 +322,7 @@ public class Parser {
         }
     }
 
-    public Expression parseExpr() throws EvalError {
+    public Expression parseExpr(){
         Expression t = paresTerm();
         while (tkz.peek().equals("+") || tkz.peek().equals("-")) {
             if(tkz.peek().equals("+")){
@@ -338,9 +336,8 @@ public class Parser {
         return t;
     }
 
-    public Expression paresTerm() throws EvalError {
+    public Expression paresTerm(){
         Expression f = paresFactor();
-
         while (tkz.peek().equals("*") || tkz.peek().equals("/") ||
                 tkz.peek().equals("%")) {
             if(tkz.peek().equals("*")){
@@ -357,7 +354,7 @@ public class Parser {
         return f;
     }
 
-    public Expression paresFactor() throws EvalError {
+    public Expression paresFactor(){
         Expression p = parsePower();
         while (tkz.peek().equals("^")){
             tkz.consume();
@@ -366,7 +363,7 @@ public class Parser {
         return p;
     }
 
-    public Expression parsePower() throws EvalError {
+    public Expression parsePower(){
         Expression expr;
         if(isNumber(tkz.peek())){
             expr = new IntLit(Integer.parseInt(tkz.peek()));
@@ -380,12 +377,7 @@ public class Parser {
                 tkz.peek().equals("nearby") ){
             expr = parseSensor();
         }else{
-            if(!tkz.peek().equals("")){
-                expr = new Identifier(tkz.peek());
-                tkz.consume();      // consume identifier
-            }else
-                throw new EvalError("Evaluating error : missing expression ");
-
+            expr = new Identifier(tkz.peek());
         }
         return expr;
     }
@@ -402,7 +394,7 @@ public class Parser {
         }
     }
 
-    public void eval() throws EvalError {
+    public void eval(){
         for(Statement stm : parseProgram()){
             stm.eval(sampleStorage);
         }
