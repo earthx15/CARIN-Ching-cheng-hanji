@@ -200,7 +200,7 @@ public class Parser {
         return expr;
     }
 
-    public Expression parseSensor(){
+    public Expression parseSensor() throws EvalError {
         if(tkz.peek().equals("virus")){
             return new IntLit(0);
         }else if(tkz.peek().equals("virus")){
@@ -208,7 +208,7 @@ public class Parser {
         }else if(tkz.peek().equals("virus")){
             return new IntLit(0);
         }else{
-            return new IntLit(0);
+            throw new EvalError("Eval error");
         }
     }
 
