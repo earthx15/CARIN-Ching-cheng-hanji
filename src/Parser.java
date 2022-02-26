@@ -23,7 +23,7 @@ public class Parser {
 
     }
 
-    public Statement parseStm(){
+    public Statement parseStm() throws EvalError {
         if(tkz.peek().equals("{")){
             return parseBlkStm();
         }else if(tkz.peek().equals("if")){
@@ -34,7 +34,7 @@ public class Parser {
             return parseCommand();
     }
 
-    public Statement parseBlkStm(){
+    public Statement parseBlkStm() throws EvalError {
         tkz.consume();      // consume {
         List<Statement> stmList = new LinkedList<>();
         while (!tkz.peek().equals("}")){
@@ -45,7 +45,7 @@ public class Parser {
         return new BlockStatement(stmList);
     }
 
-    public Statement parseIfStm(){
+    public Statement parseIfStm() throws EvalError {
         tkz.consume();      // consume if
         //check for (
         tkz.consume();      // consume (
@@ -67,7 +67,7 @@ public class Parser {
         return new IfStatement(expr, ts, fs);
     }
 
-    public Statement parseWhileStm(){
+    public Statement parseWhileStm() throws EvalError {
         tkz.consume();      // consume while
         //check for (
         tkz.consume();      // consume (
@@ -82,7 +82,7 @@ public class Parser {
         return new WhileStatement(expr, stm);
     }
 
-    public Statement parseAsgnStm(){
+    public Statement parseAsgnStm() throws EvalError {
         Identifier iden = new Identifier(tkz.peek());
         tkz.consume();      // consume identifier
         //check if next token is not expr
@@ -91,7 +91,7 @@ public class Parser {
         return new AssignmentStatement(iden, expr);
     }
 
-    public Statement parseCommand(){
+    public Statement parseCommand() throws EvalError {
         if(tkz.peek().equals("move")){
             tkz.consume();      // consume move
             Direction dir = parseDirection();
@@ -124,7 +124,7 @@ public class Parser {
         }
     }
 
-    public Expression parseExpr(){
+    public Expression parseExpr() throws EvalError {
         Expression t = paresTerm();
         while (tkz.peek().equals("+") || tkz.peek().equals("-")) {
             if(tkz.peek().equals("+")){
@@ -138,7 +138,7 @@ public class Parser {
         return t;
     }
 
-    public Expression paresTerm(){
+    public Expression paresTerm() throws EvalError {
         Expression f = paresFactor();
         while (tkz.peek().equals("*") || tkz.peek().equals("/") ||
                 tkz.peek().equals("%")) {
@@ -156,7 +156,7 @@ public class Parser {
         return f;
     }
 
-    public Expression paresFactor(){
+    public Expression paresFactor() throws EvalError {
         Expression p = parsePower();
         while (tkz.peek().equals("^")){
             tkz.consume();
@@ -165,7 +165,7 @@ public class Parser {
         return p;
     }
 
-    public Expression parsePower(){
+    public Expression parsePower() throws EvalError {
         Expression expr;
         if(isNumber(tkz.peek())){
             expr = new IntLit(Integer.parseInt(tkz.peek()));
@@ -196,7 +196,7 @@ public class Parser {
         }
     }
 
-    public void eval(){
+    public void eval() throws EvalError {
         for(Statement stm : parseProgram()){
             stm.eval(sampleStorage);
         }
