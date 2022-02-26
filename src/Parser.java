@@ -195,18 +195,24 @@ public class Parser {
                 tkz.consume();
             }else
                 throw new EvalError("miss Expression");
-
         }
         return expr;
     }
 
     public Expression parseSensor() throws EvalError {
         if(tkz.peek().equals("virus")){
-            return new IntLit(0);
-        }else if(tkz.peek().equals("virus")){
-            return new IntLit(0);
-        }else if(tkz.peek().equals("virus")){
-            return new IntLit(0);
+            tkz.consume();
+            //find virus
+            return new SensorExpression(22);
+        }else if(tkz.peek().equals("antibody")){
+            tkz.consume();
+            //find antibody
+            return new SensorExpression(12);
+        }else if(tkz.peek().equals("nearby")){
+            tkz.consume();
+            Direction dir = parseDirection();
+            // find nearby
+            return new SensorExpression(12);
         }else{
             throw new EvalError("Eval error");
         }
