@@ -48,11 +48,15 @@ public class Parser {
     public Statement parseIfStm() throws EvalError {
         tkz.consume();      // consume if
         //check for (
+        if(!tkz.peek().equals("("))
+            throw new EvalError("missing (");
         tkz.consume();      // consume (
 
         Expression expr = parseExpr();
 
         //check for )
+        if(!tkz.peek().equals(")"))
+            throw new EvalError("missing )");
         tkz.consume();      // consume )
 
         //check for then
@@ -61,6 +65,8 @@ public class Parser {
         Statement ts = parseStm();
 
         //check for else
+        if(!tkz.peek().equals("else"))
+            throw new EvalError("missing else");
         tkz.consume();      // consume else
 
         Statement fs = parseStm();
