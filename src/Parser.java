@@ -11,18 +11,16 @@ public class Parser {
 
     public Parser(String src) {
         this.tkz = new Tokenizer(src);
-        sampleStorage.put("a", 0);
-        sampleStorage.put("b", 0);
-        sampleStorage.put("c", 0);
     }
 
-    public List<Statement> parseProgram(){
-        List<Statement> stmList = new LinkedList<>();
-        while(tkz.hasNext){
-            Statement stm = parseStm();
-            stmList.add(stm);
-        }
-        return stmList;
+    public List<Statement> parseProgram() throws EvalError {
+            List<Statement> stmList = new LinkedList<>();
+            while(tkz.hasNext){
+                Statement stm = parseStm();
+                stmList.add(stm);
+            }
+            return stmList;
+
     }
 
     public Statement parseStm(){
