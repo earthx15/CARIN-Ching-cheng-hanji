@@ -190,7 +190,12 @@ public class Parser {
                 tkz.peek().equals("nearby") ){
             expr = parseSensor();
         }else{
-            expr = new Identifier(tkz.peek());
+            if(!tkz.peek().equals("")){
+                expr = new Identifier(tkz.peek());
+                tkz.consume();
+            }else
+                throw new EvalError("miss Expression");
+
         }
         return expr;
     }
