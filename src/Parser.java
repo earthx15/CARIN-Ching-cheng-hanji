@@ -118,7 +118,7 @@ public class Parser {
             return parseAsgnStm();
     }
 
-    private Direction parseDirection() {
+    private Direction parseDirection() throws EvalError {
         if(tkz.peek().equals("left") ||
                 tkz.peek().equals("right") ||
                 tkz.peek().equals("up") ||
@@ -131,7 +131,7 @@ public class Parser {
             tkz.consume();
             return dir;
         }else{
-            return null;// throw unknown direction
+            throw new EvalError("Unknown Direction");
         }
     }
 
