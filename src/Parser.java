@@ -171,7 +171,7 @@ public class Parser {
         Expression p = parsePower();
         while (tkz.peek().equals("^")){
             tkz.consume();
-            p = new BinaryArithExpr(p, "^", parsePower());
+            p = new BinaryArithExpr(p, "^", paresFactor());
         }
         return p;
     }
