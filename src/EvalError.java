@@ -1,5 +1,5 @@
-public class EvalError extends Exception {
-    EvalError(String error) {
+public class EvalError extends Exception{
+    public EvalError(String error){
         super(error);
     }
 }
