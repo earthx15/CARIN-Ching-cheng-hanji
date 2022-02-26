@@ -75,12 +75,17 @@ public class Parser {
 
     public Statement parseWhileStm() throws EvalError {
         tkz.consume();      // consume while
+
         //check for (
+        if(!tkz.peek().equals("("))
+            throw new EvalError("missing (");
         tkz.consume();      // consume (
 
         Expression expr = parseExpr();
 
         //check for )
+        if(!tkz.peek().equals(")"))
+            throw new EvalError("missing )");
         tkz.consume();      // consume )
 
         Statement stm = parseStm();
