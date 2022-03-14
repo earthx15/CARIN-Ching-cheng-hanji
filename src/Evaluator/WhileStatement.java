@@ -16,9 +16,9 @@ public class WhileStatement implements Statement {
     }
 
     @Override
-    public void eval(Map<String, Integer> strg) throws EvalError {
-        for (int i = 0; i < 1000 && expr.eval(strg) > 0; i++) {
-            stm.eval(strg);
+    public void eval(Map<String, Integer> binding, Host unit, CellsField cf) throws EvalError {
+        for (int i = 0; i < 1000 && expr.eval(binding) > 0; i++) {
+            stm.eval(binding, unit, cf);
         }
     }
 }
