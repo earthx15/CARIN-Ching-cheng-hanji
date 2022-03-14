@@ -1,16 +1,21 @@
 package Evaluator;
 
 import java.util.Map;
+import java.util.Random;
 
 public class Identifier implements Expression {
     public final String name;
     private int value = 0;
+    private Random rand = new Random();
 
     public Identifier(String name) {
         this.name = name;
     }
 
     public int eval(Map<String, Integer> strg) {
+        if(name.equals("random"))
+            return rand.nextInt(100);
+
         if (strg.containsKey(name)) {
             value = strg.get(name);
             return value;
