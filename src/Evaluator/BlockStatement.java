@@ -1,3 +1,8 @@
+package Evaluator;
+
+import Entity.Host;
+import Game.CellsField;
+
 import java.util.List;
 import java.util.Map;
 

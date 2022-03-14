@@ -1,3 +1,8 @@
+package Evaluator;
+
+import Entity.Host;
+import Game.CellsField;
+
 import java.util.Map;
 
 public class MoveCommand implements Statement {
