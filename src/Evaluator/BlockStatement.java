@@ -14,8 +14,8 @@ public class BlockStatement implements Statement {
     }
 
     @Override
-    public void eval(Map<String, Integer> strg) throws EvalError {
+    public void eval(Map<String, Integer> binding, Host unit, CellsField cf) throws EvalError {
         for (Statement s : list)
-            s.eval(strg);
+            s.eval(binding, unit, cf);
     }
 }
