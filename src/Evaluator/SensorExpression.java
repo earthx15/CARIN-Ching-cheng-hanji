@@ -11,8 +11,17 @@ public class SensorExpression implements Expression {
     private Host unit;
     private CellsField cf;
 
-    public SensorExpression(int dt) {
-        this.distance = dt;
+    public SensorExpression(String command, Host unit, CellsField cf) {
+        this.command = command;
+        this.unit = unit;
+        this.cf = cf;
+    }
+
+    public SensorExpression(String command, Direction dir, Host unit, CellsField cf) {
+        this.command = command;
+        this.dir = dir;
+        this.unit = unit;
+        this.cf = cf;
     }
 
     @Override
