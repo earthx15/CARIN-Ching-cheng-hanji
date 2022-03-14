@@ -153,7 +153,7 @@ public class Parser {
             tkz.consume();
             return dir;
         }else{
-            throw new EvalError("Unknown Evaluator Direction");
+            throw new EvalError("Unknown Direction");
         }
     }
 
