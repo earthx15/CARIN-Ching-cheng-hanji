@@ -17,10 +17,10 @@ public class IfStatement implements Statement {
     }
 
     @Override
-    public void eval(Map<String, Integer> strg) throws EvalError {
-        if (expr.eval(strg) > 0)
-            trueStatement.eval(strg);
+    public void eval(Map<String, Integer> binding, Host unit, CellsField cf) throws EvalError {
+        if (expr.eval(binding) > 0)
+            trueStatement.eval(binding, unit, cf);
         else
-            falseStatement.eval(strg);
+            falseStatement.eval(binding, unit, cf);
     }
 }
