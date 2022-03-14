@@ -17,12 +17,13 @@ public class AssignmentStatement implements Statement {
     }
 
     @Override
-    public void eval(Map<String, Integer> strg) throws EvalError {
-        var.assign(expr.eval(strg));
-        var.update(strg);
+    public void eval(Map<String, Integer> binding, Host unit, CellsField cf) throws EvalError {
+        var.assign(expr.eval(binding));
+        var.update(binding);
 
-        System.out.println(var.name + " = " + var.eval(strg));
-        testOut.append(var.name).append(" = ").append(var.eval(strg)).append("\n");
+        System.out.println(var.name + " = " + var.eval(binding));
+        testOut.append(var.name).append(" = ").append(var.eval(binding)).append("\n");
 
     }
+
 }
