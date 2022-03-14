@@ -27,6 +27,15 @@ public class Parser {
         this.cf = cf;
     }
 
+    public void addUnit(Host unit, Map<String, Integer> binding) {
+        this.unit = unit;
+        this.binding = binding;
+    }
+
+    public void addCellsField(CellsField cf) {
+        this.cf = cf;
+    }
+
     public List<Statement> parseProgram() throws EvalError {
             List<Statement> stmList = new LinkedList<>();
             while(tkz.hasNext){
