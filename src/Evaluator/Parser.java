@@ -239,7 +239,7 @@ public class Parser {
 
     public void eval() throws EvalError {
         for(Statement stm : parseProgram()){
-            stm.eval(sampleStorage);
+            stm.eval(binding, unit, cf);
         }
     }
 
