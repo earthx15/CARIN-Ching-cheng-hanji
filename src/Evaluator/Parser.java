@@ -37,7 +37,6 @@ public class Parser {
     }
 
     public List<Statement> parseProgram() throws EvalError {
-            List<Statement> stmList = new LinkedList<>();
             while(tkz.hasNext){
                 Statement stm = parseStm();
                 stmList.add(stm);
