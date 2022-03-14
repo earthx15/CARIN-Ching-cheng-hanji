@@ -6,7 +6,10 @@ import Game.CellsField;
 import java.util.Map;
 
 public class SensorExpression implements Expression {
-    private int distance;
+    private String command;
+    private Direction dir;
+    private Host unit;
+    private CellsField cf;
 
     public SensorExpression(int dt) {
         this.distance = dt;
