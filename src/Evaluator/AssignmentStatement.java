@@ -1,5 +1,8 @@
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+package Evaluator;
+
+import Entity.Host;
+import Game.CellsField;
+
 import java.util.Map;
 
 public class AssignmentStatement implements Statement {
