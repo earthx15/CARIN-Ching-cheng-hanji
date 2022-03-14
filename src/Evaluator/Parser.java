@@ -11,7 +11,10 @@ import Game.*;
 public class Parser {
 
     protected Tokenizer tkz;
-    public Map<String, Integer> sampleStorage = new HashMap<>();
+    protected Map<String, Integer> binding = new HashMap<>();
+    protected Host unit;
+    protected CellsField cf;
+    protected List<Statement> stmList = new LinkedList<>();
 
     public Parser(String src) {
         this.tkz = new Tokenizer(src);
