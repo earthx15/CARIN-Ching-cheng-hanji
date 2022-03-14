@@ -224,17 +224,14 @@ public class Parser {
     public Expression parseSensor() throws EvalError {
         if(tkz.peek().equals("virus")){
             tkz.consume();
-            //find virus
-            return new SensorExpression(22);
+            return new SensorExpression("virus", unit, cf);
         }else if(tkz.peek().equals("antibody")){
             tkz.consume();
-            //find antibody
-            return new SensorExpression(12);
+            return new SensorExpression("antibody", unit, cf);
         }else if(tkz.peek().equals("nearby")){
             tkz.consume();
             Direction dir = parseDirection();
-            // find nearby
-            return new SensorExpression(12);
+            return new SensorExpression("nearby", dir, unit, cf);
         }else{
             throw new EvalError("Eval error");
         }
