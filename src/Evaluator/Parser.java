@@ -16,8 +16,15 @@ public class Parser {
     protected CellsField cf;
     protected List<Statement> stmList = new LinkedList<>();
 
+    //for expression testing only
     public Parser(String src) {
         this.tkz = new Tokenizer(src);
+    }
+
+    public Parser(String src, Host unit, CellsField cf) {
+        this.tkz = new Tokenizer(src);
+        this.unit = unit;
+        this.cf = cf;
     }
 
     public List<Statement> parseProgram() throws EvalError {
