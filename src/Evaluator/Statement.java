@@ -6,5 +6,6 @@ import Game.CellsField;
 import java.util.Map;
 
 public interface Statement {
-    void eval(Map<String, Integer> strg) throws EvalError;
+    void eval(Map<String, Integer> binding, Host unit, CellsField cf) throws EvalError;
+
 }
