@@ -16,13 +16,13 @@ public class AttackCommand implements Statement {
 
     @Override
     public void eval(Map<String, Integer> binding, Host unit, CellsField cf) throws EvalError {
-        System.out.println("Attack : " + direction.eval(binding));
         testOut.append("Attack : ").append(direction.eval(binding)).append("\n");
 
         if(unit == null) throw new EvalError("Missing Host unit");
 
         int dst_i = unit.getPosition()[0];
         int dst_j = unit.getPosition()[1];
+
 
         if(direction.eval(binding).equals("up")){
             for(int k = 1; k <= unit.getAtkRange(); k++){
