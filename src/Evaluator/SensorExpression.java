@@ -25,7 +25,7 @@ public class SensorExpression implements Expression {
     }
 
     @Override
-    public int eval(Map<String, Integer> binding) throws EvalError {
+    public int eval(Map<String, Integer> binding, Host unit) throws EvalError {
         if(command.equals("virus")){
             int this_i = unit.getPosition()[0];
             int this_j = unit.getPosition()[1];
