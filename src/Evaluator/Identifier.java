@@ -1,5 +1,7 @@
 package Evaluator;
 
+import Entity.Host;
+
 import java.util.Map;
 import java.util.Random;
 
