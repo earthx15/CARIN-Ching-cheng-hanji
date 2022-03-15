@@ -25,7 +25,9 @@ public class Antibody implements Host {
         if(atk > host.getCurHp())
             curHP = Math.min(curHP + killGain, maxHP);
         host.beAttacked(atk);
-        System.out.println("Antibody attack : " + atk);
+        System.out.println("Antibody attack target at " + host.getPosition()[0] + "," + host.getPosition()[1]);
+        System.out.println("Virus now has HP " + host.getCurHp());
+        System.out.println();
     }
 
     public void beAttacked(int dmg) {
