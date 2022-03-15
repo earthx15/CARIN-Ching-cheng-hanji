@@ -8,19 +8,16 @@ import java.util.Map;
 public class SensorExpression implements Expression {
     private String command;
     private Direction dir;
-    private Host unit;
     private CellsField cf;
 
-    public SensorExpression(String command, Host unit, CellsField cf) {
+    public SensorExpression(String command, CellsField cf) {
         this.command = command;
-        this.unit = unit;
         this.cf = cf;
     }
 
-    public SensorExpression(String command, Direction dir, Host unit, CellsField cf) {
+    public SensorExpression(String command, Direction dir, CellsField cf) {
         this.command = command;
         this.dir = dir;
-        this.unit = unit;
         this.cf = cf;
     }
 
