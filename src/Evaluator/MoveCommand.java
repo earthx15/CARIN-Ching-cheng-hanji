@@ -43,7 +43,14 @@ public class MoveCommand implements Statement {
             dst_i -= 1;
             dst_j -= 1;
         }
-        if(cf.checkUnit(dst_i, dst_j).equals("empty") && !cf.checkUnit(dst_i, dst_j).equals("out"))
+        if(cf.checkUnit(dst_i, dst_j).equals("empty") && !cf.checkUnit(dst_i, dst_j).equals("out")) {
+            testOut.append(unit.getClass().getSimpleName()).append(" from ").append(unit.getPosition()[0]).append(",").append(unit.getPosition()[1])
+                    .append(" move to ").append(dst_i).append(",").append(dst_j).append("\n");
             cf.moveUnit(dst_i, dst_j, unit);
+        }else {
+            testOut.append(unit.getClass().getSimpleName()).append(" from ").append(unit.getPosition()[0]).append(",").append(unit.getPosition()[1])
+                    .append(" cannot move to ").append(dst_i).append(",").append(dst_j).append("\n");
+        }
+        System.out.println(testOut);
     }
 }
