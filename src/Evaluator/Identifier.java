@@ -12,7 +12,7 @@ public class Identifier implements Expression {
         this.name = name;
     }
 
-    public int eval(Map<String, Integer> strg) {
+    public int eval(Map<String, Integer> strg, Host unit) {
         if(name.equals("random"))
             return rand.nextInt(100);
 
