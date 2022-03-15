@@ -16,9 +16,7 @@ public class MoveCommand implements Statement {
 
     @Override
     public void eval(Map<String, Integer> binding, Host unit, CellsField cf) throws EvalError {
-        System.out.println("Move : " + direction.eval(binding));
-        testOut.append("Move : ").append(direction.eval(binding)).append("\n");
-
+        testOut = new StringBuilder();
         if(unit == null) throw new EvalError("Missing Host unit");
 
         int dst_i = unit.getPosition()[0];
