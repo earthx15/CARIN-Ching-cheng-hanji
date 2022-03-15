@@ -15,9 +15,9 @@ public class BinaryArithExpr implements Expression {
     }
 
     @Override
-    public int eval(Map<String, Integer> strg) throws EvalError {
-        int lv = left.eval(strg);
-        int rv = right.eval(strg);
+    public int eval(Map<String, Integer> binding, Host unit) throws EvalError {
+        int lv = left.eval(binding, unit);
+        int rv = right.eval(binding, unit);
 
         try {
             if (op.equals("+")) return lv + rv;
