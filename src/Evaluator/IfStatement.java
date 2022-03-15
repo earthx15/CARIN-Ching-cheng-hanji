@@ -18,7 +18,7 @@ public class IfStatement implements Statement {
 
     @Override
     public void eval(Map<String, Integer> binding, Host unit, CellsField cf) throws EvalError {
-        if (expr.eval(binding) > 0)
+        if (expr.eval(binding, unit) > 0)
             trueStatement.eval(binding, unit, cf);
         else
             falseStatement.eval(binding, unit, cf);
