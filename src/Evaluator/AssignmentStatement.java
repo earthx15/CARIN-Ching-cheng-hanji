@@ -18,11 +18,11 @@ public class AssignmentStatement implements Statement {
 
     @Override
     public void eval(Map<String, Integer> binding, Host unit, CellsField cf) throws EvalError {
-        var.assign(expr.eval(binding));
+        var.assign(expr.eval(binding, unit));
         var.update(binding);
 
-        System.out.println(var.name + " = " + var.eval(binding));
-        testOut.append(var.name).append(" = ").append(var.eval(binding)).append("\n");
+        System.out.println(var.name + " = " + var.eval(binding, unit));
+        testOut.append(var.name).append(" = ").append(var.eval(binding, unit)).append("\n");
 
     }
 
