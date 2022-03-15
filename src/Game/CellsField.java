@@ -2,14 +2,16 @@ package Game;
 
 import Entity.Host;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 public class CellsField {
     private Cell[][] cellsField;
-    private Set<Host> hostSet = new HashSet<>();
+    public List<int[]> mutantsPosList = new LinkedList<>();
+    public List<Host> hostList = new LinkedList<>();
 
     public CellsField(int row, int col){
+
         cellsField = new Cell[col][row];
         for(int i = 0; i < col; i ++){
             for(int j = 0; j < row; j++){
@@ -28,7 +30,7 @@ public class CellsField {
     public void addUnit(Host unit){
         if(cellsField[unit.getPosition()[0]][unit.getPosition()[1]].isEmpty()) {
             cellsField[unit.getPosition()[0]][unit.getPosition()[1]].addUnit(unit);
-            hostSet.add(unit);
+            hostList.add(unit);
         }
     }
 
@@ -43,8 +45,12 @@ public class CellsField {
         int i = unit.getPosition()[0];
         int j = unit.getPosition()[1];
         if(checkUnit(i,j).equals("Antibody") || checkUnit(i,j).equals("Virus")) {
+            if(unit.getClass().getSimpleName().equals("Antibody"))
+                mutantsPosList.add(new int[]{i,j});
             cellsField[i][j].removeUnit();
-            hostSet.remove(unit);
+            hostList.remove(unit);
+            System.out.println(unit.getClass().getSimpleName() + " at " + i + "," + j + " has died!");
+            System.out.println();
         }
     }
 
@@ -59,7 +65,7 @@ public class CellsField {
     }
 
     public boolean isAlive(Host unit){
-        return hostSet.contains(unit);
+        return hostList.contains(unit);
     }
 
 
