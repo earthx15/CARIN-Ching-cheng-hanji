@@ -27,7 +27,9 @@ public class Virus implements Host {
             dmg = host.getCurHp();
         host.beAttacked(dmg);
         curHP = Math.min(curHP + atkGain, maxHP);
-        System.out.println("Virus attack : " + dmg);
+        System.out.println("Virus attack target at " + host.getPosition()[0] + "," + host.getPosition()[1]);
+        System.out.println("Antibody now has HP " + host.getCurHp());
+        System.out.println();
 
     }
 
