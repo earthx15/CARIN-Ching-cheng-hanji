@@ -85,8 +85,26 @@ public class MainGame {
             System.out.println("Spawn normal antibody at " + ab.getPosition()[0] +"," + ab.getPosition()[1]);
         }
         System.out.println();
-        for(int i = 0; i < 10; i++){
-            System.out.println("Round " + (i+1));
+        for(int i = 0; i < 999; i++){
+            System.out.println("--------------------------------------------");
+            if(cellsField.virusCount > 0 && cellsField.antibodyCount == 0){
+                System.out.println();
+                System.out.println("             *** GAME OVER ***             ");
+                System.out.println("    *** VIRUS HAS CONQUERED THE BODY ***      ");
+                System.out.println();
+                System.out.println("--------------------------------------------");
+                System.out.println("============================================");
+                break;
+            }else if(cellsField.virusCount == 0 && cellsField.antibodyCount > 0){
+                System.out.println();
+                System.out.println("             *** GAME OVER ***             ");
+                System.out.println("   *** ANTIBODY HAS CONQUERED THE BODY ***      ");
+                System.out.println();
+                System.out.println("--------------------------------------------");
+                System.out.println("============================================");
+                break;
+            }
+            System.out.println("               * Round " + (i+1) + " *");
 
             int randomSpawn = rand.nextInt(100) + 1;     //1 - 100
             Virus rv;
@@ -149,7 +167,12 @@ public class MainGame {
             cellsField.mutantsPosList.clear();
 
             System.out.println("============================================");
+            if(i == 998){
+                System.out.println("There are more than 999 turns! ");
+                System.out.println("Adjust the Config file if you do not want the war last too long");
+            }
         }
+
 
 
 
