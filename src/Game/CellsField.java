@@ -34,6 +34,11 @@ public class CellsField {
         if(cellsField[unit.getPosition()[0]][unit.getPosition()[1]].isEmpty()) {
             cellsField[unit.getPosition()[0]][unit.getPosition()[1]].addUnit(unit);
             hostList.add(unit);
+
+            if(unit.getClass().getSimpleName().equals("Virus"))
+                virusCount++;
+            else
+                antibodyCount++;
         }
     }
 
@@ -54,6 +59,11 @@ public class CellsField {
             hostList.remove(unit);
             System.out.println(unit.getClass().getSimpleName() + " at " + i + "," + j + " has died!");
             System.out.println();
+
+            if(unit.getClass().getSimpleName().equals("Virus"))
+                virusCount--;
+            else
+                antibodyCount--;
         }
     }
 
