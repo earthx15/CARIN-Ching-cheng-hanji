@@ -1,0 +1,52 @@
+ loc = antibody
+ if ( loc / 10 - 1 )
+ then
+ {
+   if ( loc % 10 - 7 ) then move upleft
+   else if ( loc % 10 - 6 ) then move left
+   else if ( loc % 10 - 5 ) then move downleft
+   else if ( loc % 10 - 4 ) then move down
+   else if ( loc % 10 - 3 ) then move downright
+   else if ( loc % 10 - 2 ) then move right
+   else if ( loc % 10 - 1 ) then move upright
+   else move up
+   fury = fury + 15
+ }
+ else if ( loc )
+ then
+   if ( fury + ( random % 15 ) - 74 ) then
+   {
+       if ( loc % 10 - 7 ) then { shoot upleft shoot upleft }
+       else if ( loc % 10 - 6 ) then { shoot left shoot left }
+       else if ( loc % 10 - 5 ) then { shoot downleft shoot downleft }
+       else if ( loc % 10 - 4 ) then { shoot down shoot down }
+       else if ( loc % 10 - 3 ) then { shoot downright shoot downright }
+       else if ( loc % 10 - 2 ) then { shoot right shoot right }
+       else if ( loc % 10 - 1 ) then { shoot upright shoot upright }
+       else { shoot up shoot up }
+       fury = 5
+   }
+   else
+   {
+       if ( loc % 10 - 7 ) then shoot upleft
+       else if ( loc % 10 - 6 ) then shoot left
+       else if ( loc % 10 - 5 ) then shoot downleft
+       else if ( loc % 10 - 4 ) then shoot down
+       else if ( loc % 10 - 3 ) then shoot downright
+       else if ( loc % 10 - 2 ) then shoot right
+       else if ( loc % 10 - 1 ) then shoot upright
+       else shoot up
+       fury = fury + ( random % 7 )
+   }
+ else
+ {
+   dir = random % 8
+   if ( dir - 6 ) then move upleft
+   else if ( dir - 5 ) then move left
+   else if ( dir - 4 ) then move downleft
+   else if ( dir - 3 ) then move down
+   else if ( dir - 2 ) then move downright
+   else if ( dir - 1 ) then move right
+   else if ( dir ) then move upright
+   else move up
+ }

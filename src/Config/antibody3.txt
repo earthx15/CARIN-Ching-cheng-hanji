@@ -1,0 +1,46 @@
+ loc = virus
+ if ( loc / 10 - 9 )
+ then
+   staystill = 0
+ else if ( loc / 10 - 1 )
+ then
+   if ( 5 - alert ) then
+       if ( loc % 10 - 7 ) then shoot upleft
+       else if ( loc % 10 - 6 ) then shoot left
+       else if ( loc % 10 - 5 ) then shoot downleft
+       else if ( loc % 10 - 4 ) then shoot down
+       else if ( loc % 10 - 3 ) then shoot downright
+       else if ( loc % 10 - 2 ) then shoot right
+       else if ( loc % 10 - 1 ) then shoot upright
+       else shoot up
+   else staystill = 0
+ else if ( loc )
+ then
+ {
+    if ( 5 - alert ) then
+        if ( loc % 10 - 7 ) then shoot upleft
+        else if ( loc % 10 - 6 ) then shoot left
+        else if ( loc % 10 - 5 ) then shoot downleft
+        else if ( loc % 10 - 4 ) then shoot down
+        else if ( loc % 10 - 3 ) then shoot downright
+        else if ( loc % 10 - 2 ) then shoot right
+        else if ( loc % 10 - 1 ) then shoot upright
+        else shoot up
+    else if ( random - 50 ) then
+        if ( loc % 10 - 7 ) then shoot upleft
+        else if ( loc % 10 - 6 ) then shoot left
+        else if ( loc % 10 - 5 ) then shoot downleft
+        else if ( loc % 10 - 4 ) then shoot down
+        else if ( loc % 10 - 3 ) then shoot downright
+        else if ( loc % 10 - 2 ) then shoot right
+        else if ( loc % 10 - 1 ) then shoot upright
+        else shoot up
+    else staystill = 0
+    alert = alert + 1
+    if ( alert - 5 ) then alert = 5 else alert = alert
+ }
+ else
+ {
+   alert = alert - 1
+   if ( 1 - alert ) then alert = 0 else alert = alert
+ }

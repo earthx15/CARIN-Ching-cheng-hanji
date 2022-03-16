@@ -1,0 +1,71 @@
+ loc = virus
+ if ( loc / 10 - 5 )
+ then
+   if ( loc % 10 - 7 ) then move upleft
+   else if ( loc % 10 - 6 ) then move left
+   else if ( loc % 10 - 5 ) then move downleft
+   else if ( loc % 10 - 4 ) then move down
+   else if ( loc % 10 - 3 ) then move downright
+   else if ( loc % 10 - 2 ) then move right
+   else if ( loc % 10 - 1 ) then move upright
+   else move up
+ else if ( loc / 10 - 1 )
+ then
+ {
+   crit = nextCrit + random
+   if ( crit - 79 ) then
+   {
+        if ( loc % 10 - 7 ) then { shoot upleft shoot upleft }
+        else if ( loc % 10 - 6 ) then { shoot left shoot left }
+        else if ( loc % 10 - 5 ) then { shoot downleft shoot downleft }
+        else if ( loc % 10 - 4 ) then { shoot down shoot down }
+        else if ( loc % 10 - 3 ) then { shoot downright shoot downright }
+        else if ( loc % 10 - 2 ) then { shoot right shoot right }
+        else if ( loc % 10 - 1 ) then { shoot upright shoot upright }
+        else { shoot up shoot up }
+        crit = 0
+        nextCrit = 0
+   }
+   else
+   {
+       if ( loc % 10 - 7 ) then shoot upleft
+       else if ( loc % 10 - 6 ) then shoot left
+       else if ( loc % 10 - 5 ) then shoot downleft
+       else if ( loc % 10 - 4 ) then shoot down
+       else if ( loc % 10 - 3 ) then shoot downright
+       else if ( loc % 10 - 2 ) then shoot right
+       else if ( loc % 10 - 1 ) then shoot upright
+       else shoot up
+       crit = 0
+       nextCrit = nextCrit + 15
+   }
+ }
+ else if ( loc )
+ then
+ {
+    runaway = random
+    if ( runaway - 84 ) then
+    {
+       if ( loc % 10 - 7 ) then move downright
+       else if ( loc % 10 - 6 ) then move right
+       else if ( loc % 10 - 5 ) then move upright
+       else if ( loc % 10 - 4 ) then move up
+       else if ( loc % 10 - 3 ) then move upleft
+       else if ( loc % 10 - 2 ) then move left
+       else if ( loc % 10 - 1 ) then move downleft
+       else shoot up
+    }
+    else staystill = 0
+ }
+ else
+ {
+   dir = random % 8
+   if ( dir - 6 ) then move upleft
+   else if ( dir - 5 ) then move left
+   else if ( dir - 4 ) then move downleft
+   else if ( dir - 3 ) then move down
+   else if ( dir - 2 ) then move downright
+   else if ( dir - 1 ) then move right
+   else if ( dir ) then move upright
+   else move up
+ }
