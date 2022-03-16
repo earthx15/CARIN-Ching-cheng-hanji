@@ -27,10 +27,9 @@ public class Virus implements Host {
             dmg = host.getCurHp();
         host.beAttacked(dmg);
         curHP = Math.min(curHP + atkGain, maxHP);
-        System.out.println("Virus attack target at " + host.getPosition()[0] + "," + host.getPosition()[1]);
-        System.out.println("Antibody now has HP " + host.getCurHp());
-        System.out.println();
-
+        System.out.println("Virus " + position[0] + "," + position[1] +  " attack target at " + host.getPosition()[0] + "," + host.getPosition()[1]);
+        System.out.println("Virus gain some HP from " + (curHP - atkGain) + " to " + curHP);
+        System.out.println("Antibody HP decreases from "+ (host.getCurHp() + dmg) + " to " + host.getCurHp());
     }
 
     public void beAttacked(int dmg) {
