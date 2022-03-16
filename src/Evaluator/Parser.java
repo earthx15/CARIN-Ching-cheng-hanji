@@ -62,7 +62,7 @@ public class Parser {
         while (!tkz.peek().equals("}")){
             Statement stm = parseStm();
             stmList.add(stm);
-        }// check for missing }
+        }
         tkz.consume();      //consume }
         return new BlockStatement(stmList);
     }
@@ -82,6 +82,8 @@ public class Parser {
         tkz.consume();      // consume )
 
         //check for then
+        if(!tkz.peek().equals("then"))
+            throw new EvalError("missing then");
         tkz.consume();      // consume then
 
         Statement ts = parseStm();
@@ -119,6 +121,8 @@ public class Parser {
         Identifier iden = new Identifier(tkz.peek());
         tkz.consume();      // consume identifier
         //check if next token is not expr
+        if(!tkz.peek().equals("="))
+            throw new EvalError("missing =");
         tkz.consume();      // consume =
         Expression expr = parseExpr();
         return new AssignmentStatement(iden, expr);
