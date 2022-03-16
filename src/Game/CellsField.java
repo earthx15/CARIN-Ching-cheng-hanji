@@ -7,11 +7,14 @@ import java.util.List;
 
 public class CellsField {
     private Cell[][] cellsField;
+    protected int virusCount;
+    protected int antibodyCount;
     public List<int[]> mutantsPosList = new LinkedList<>();
     public List<Host> hostList = new LinkedList<>();
 
     public CellsField(int row, int col){
-
+        virusCount = 0;
+        antibodyCount = 0;
         cellsField = new Cell[col][row];
         for(int i = 0; i < col; i ++){
             for(int j = 0; j < row; j++){
