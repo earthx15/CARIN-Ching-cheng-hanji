@@ -1,7 +1,5 @@
 package Entity;
 
-import Entity.Host;
-
 public class Antibody implements Host {
     //    private String species;
     private int maxHP;

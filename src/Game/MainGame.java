@@ -22,7 +22,6 @@ public class MainGame {
     protected static Spawner virus2Spawner;
     protected static Spawner virus3Spawner;
 
-
     protected static Spawner antibodySpawner;
     protected static Spawner antibody2Spawner;
     protected static Spawner antibody3Spawner;
