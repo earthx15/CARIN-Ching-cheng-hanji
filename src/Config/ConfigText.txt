@@ -1,0 +1,8 @@
+0 width         1 length
+2 spawnRate
+3 credit        4 cost
+5 virusHP       6 antibodyHP
+7 virusAtk      8 virusAtkGain
+9 antibodyAtk  10 antibodyKillGain
+11 moveCost
+12 creditGain
