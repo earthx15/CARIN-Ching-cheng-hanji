@@ -68,7 +68,7 @@ public class MainGame {
         Parser antibody3Parser = new Parser(reader.readGenCode("src/Config/antibody3.txt"));
         antibody3Parser.addCellsField(cellsField);
 
-        //randomly spawn 3 normal virus at first
+        //randomly spawn 5 normal virus at first
         for(int k = 0; k < 3; k++){
             Virus vr = virusSpawner.randomSpawnVirus(1, config[0], config[1]);
             bindingStorage.put(vr, new HashMap<>());
@@ -76,13 +76,27 @@ public class MainGame {
             System.out.println("Spawn normal virus at " + vr.getPosition()[0] +"," + vr.getPosition()[1]);
         }
 
-        //randomly spawn 3 normal antibody at first
-        for(int k = 0; k < 3; k++){
+        //randomly spawn 2 normal antibody at first
+        for(int k = 0; k < 2; k++){
             Antibody ab = antibodySpawner.randomSpawnAntibody(1, config[0], config[1]);
             bindingStorage.put(ab, new HashMap<>());
             cellsField.addUnit(ab);
             System.out.println("Spawn normal antibody at " + ab.getPosition()[0] +"," + ab.getPosition()[1]);
         }
+
+        //randomly spawn 1 great antibody at first
+        Antibody ab2 = antibody2Spawner.randomSpawnAntibody(1, config[0], config[1]);
+        bindingStorage.put(ab2, new HashMap<>());
+        cellsField.addUnit(ab2);
+        System.out.println("Spawn normal antibody at " + ab2.getPosition()[0] +"," + ab2.getPosition()[1]);
+
+        //randomly spawn 1 sniper antibody at first
+        Antibody ab3 = antibody2Spawner.randomSpawnAntibody(1, config[0], config[1]);
+        bindingStorage.put(ab3, new HashMap<>());
+        cellsField.addUnit(ab3);
+        System.out.println("Spawn normal antibody at " + ab3.getPosition()[0] +"," + ab3.getPosition()[1]);
+
+
         System.out.println();
         for(int i = 0; i < 999; i++){
             System.out.println("--------------------------------------------");
