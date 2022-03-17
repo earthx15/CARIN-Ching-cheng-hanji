@@ -1,7 +1,7 @@
 package Entity;
 
 public class Virus implements Host {
-//    private String species;
+    private String species;
     private int maxHP;
     private int curHP;
     private int atk;
@@ -10,8 +10,8 @@ public class Virus implements Host {
     private int[] position;
 //    ability?
 
-
-    public Virus(int HP, int atk, int atkRange, int atkGain, int[] position) {
+    public Virus(String species, int HP, int atk, int atkRange, int atkGain, int[] position) {
+        this.species = species;
         this.maxHP = this.curHP = HP;
         this.atk = atk;
         this.atkGain = atkGain;
@@ -25,13 +25,17 @@ public class Virus implements Host {
             dmg = host.getCurHp();
         host.beAttacked(dmg);
         curHP = Math.min(curHP + atkGain, maxHP);
-        System.out.println("Virus " + position[0] + "," + position[1] +  " attack target at " + host.getPosition()[0] + "," + host.getPosition()[1]);
-        System.out.println("Virus gain some HP from " + (curHP - atkGain) + " to " + curHP);
-        System.out.println("Antibody HP decreases from "+ (host.getCurHp() + dmg) + " to " + host.getCurHp());
+        System.out.println(species +" Virus " + position[0] + "," + position[1] +  " attack target at " + host.getPosition()[0] + "," + host.getPosition()[1]);
+        System.out.println(species + " Virus gain some HP from " + (curHP - atkGain) + " to " + curHP);
+        System.out.println(host.getSpecies() + " Antibody HP decreases from "+ (host.getCurHp() + dmg) + " to " + host.getCurHp());
     }
 
     public void beAttacked(int dmg) {
         curHP = Math.max(curHP - dmg, 0);
+    }
+
+    public String getSpecies() {
+        return this.species;
     }
 
     public int getCurHp() {

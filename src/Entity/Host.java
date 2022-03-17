@@ -5,6 +5,8 @@ public interface Host {
 
     public void beAttacked(int dmg);
 
+    public String getSpecies();
+
     public  int getCurHp();
 
     public int getAtkRange();

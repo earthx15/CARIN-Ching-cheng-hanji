@@ -13,6 +13,7 @@ public class Spawner {
     private CellsField cf;
 
     private String unitType;
+    private String unitSpecies;
     private int unitHP;
     private int unitATK;
     private int unitAtkRange;
@@ -24,8 +25,9 @@ public class Spawner {
         this.cf = cf;
     }
 
-    public void setUnitAttribute(String unit, int unitHP, int unitATK, int unitAtkRange,  int unitGain ){
+    public void setUnitAttribute(String unit, String unitSpecies ,int unitHP, int unitATK, int unitAtkRange,  int unitGain ){
         this.unitType = unit;
+        this.unitSpecies = unitSpecies;
         this.unitHP = unitHP;
         this.unitATK = unitATK;
         this.unitAtkRange = unitAtkRange;
@@ -42,7 +44,7 @@ public class Spawner {
                 j = rand.nextInt(n);
             }
             if(unitType.equals("Virus"))
-                return new Virus(unitHP, unitATK, unitAtkRange, unitGain, new int[]{i,j});
+                return new Virus(unitSpecies, unitHP, unitATK, unitAtkRange, unitGain, new int[]{i,j});
             else
                 throw new EvalError("Unknown unit type");
         }
@@ -51,7 +53,7 @@ public class Spawner {
 
     public Virus SpawnVirus(float rate, int i, int j) throws EvalError {
         if(unitType.equals("Virus"))
-            return new Virus(unitHP, unitATK, unitAtkRange, unitGain, new int[]{i,j});
+            return new Virus(unitSpecies, unitHP, unitATK, unitAtkRange, unitGain, new int[]{i,j});
         else
             throw new EvalError("Unknown unit type");
 
@@ -67,7 +69,7 @@ public class Spawner {
                 j = rand.nextInt(n);
             }
             if(unitType.equals("Antibody"))
-                return new Antibody(unitHP, unitATK, unitAtkRange, unitGain, new int[]{i,j});
+                return new Antibody(unitSpecies, unitHP, unitATK, unitAtkRange, unitGain, new int[]{i,j});
             else
                 throw new EvalError("Unknown unit type");
         }
@@ -76,7 +78,7 @@ public class Spawner {
 
     public Antibody SpawnAntibody(float rate, int i, int j) throws EvalError {
         if(unitType.equals("Antibody"))
-            return new Antibody(unitHP, unitATK, unitAtkRange, unitGain, new int[]{i,j});
+            return new Antibody(unitSpecies, unitHP, unitATK, unitAtkRange, unitGain, new int[]{i,j});
         else
             throw new EvalError("Unknown unit type");
 

@@ -1,7 +1,7 @@
 package Entity;
 
 public class Antibody implements Host {
-    //    private String species;
+    private String species;
     private int maxHP;
     private int curHP;
     private int atk;
@@ -11,7 +11,8 @@ public class Antibody implements Host {
     //    ability?
 
 
-    public Antibody(int HP, int atk, int atkRange, int killGain, int[] position) {
+    public Antibody(String species, int HP, int atk, int atkRange, int killGain, int[] position) {
+        this.species = species;
         this.maxHP = curHP = HP;
         this.atk = atk;
         this.atkRange = atkRange;
@@ -24,11 +25,11 @@ public class Antibody implements Host {
         if(atk > host.getCurHp())
             dmg = host.getCurHp();
         host.beAttacked(dmg);
-        System.out.println("Antibody " + position[0] + "," + position[1] +  " attack target at " + host.getPosition()[0] + "," + host.getPosition()[1]);
-        System.out.println("Virus HP decreases from "+ (host.getCurHp() + dmg) + " to " + host.getCurHp());
+        System.out.println(species + " Antibody " + position[0] + "," + position[1] +  " attack target at " + host.getPosition()[0] + "," + host.getPosition()[1]);
+        System.out.println(host.getSpecies() + " Virus HP decreases from "+ (host.getCurHp() + dmg) + " to " + host.getCurHp());
         if(host.getCurHp() == 0) {
             curHP = Math.min(curHP + killGain, maxHP);
-            System.out.println("Antibody gain some HP from " + (curHP - killGain) + " to " + curHP);
+            System.out.println(species + " Antibody gain some HP from " + (curHP - killGain) + " to " + curHP);
         }
     }
 
@@ -36,7 +37,10 @@ public class Antibody implements Host {
         curHP = Math.max(curHP - dmg, 0);
     }
 
-    @Override
+    public String getSpecies() {
+        return this.species;
+    }
+
     public int getCurHp() {
         return this.curHP;
     }
