@@ -33,13 +33,13 @@ public class MainGame {
         cellsField = new CellsField(config[0], config[1]);
 
         virusSpawner = new Spawner(cellsField);
-        virusSpawner.setUnitAttribute("Virus", config[5], config[7], 1, config[8]);
+        virusSpawner.setUnitAttribute("Virus", "Normal",config[5], config[7], 1, config[8]);
 
         virus2Spawner = new Spawner(cellsField);
-        virus2Spawner.setUnitAttribute("Virus", config[5], config[7], 1, config[8]);
+        virus2Spawner.setUnitAttribute("Virus", "Great", config[5], config[7], 1, config[8]);
 
         virus3Spawner = new Spawner(cellsField);
-        virus3Spawner.setUnitAttribute("Virus", config[5], config[7], 1, config[8]);
+        virus3Spawner.setUnitAttribute("Virus", "Furious",config[5], config[7], 1, config[8]);
 
         Parser virusParser = new Parser(reader.readGenCode("src/Config/virus.txt"));
         virusParser.addCellsField(cellsField);
@@ -51,13 +51,13 @@ public class MainGame {
         virus3Parser.addCellsField(cellsField);
 
         antibodySpawner = new Spawner(cellsField);
-        antibodySpawner.setUnitAttribute("Antibody", config[6], config[9], 3, config[10]);
+        antibodySpawner.setUnitAttribute("Antibody", "Normal",config[6], config[9], 3, config[10]);
 
         antibody2Spawner = new Spawner(cellsField);
-        antibody2Spawner.setUnitAttribute("Antibody", config[6], config[9], 5, config[10]);
+        antibody2Spawner.setUnitAttribute("Antibody", "Great",config[6], config[9], 5, config[10]);
 
         antibody3Spawner = new Spawner(cellsField);
-        antibody3Spawner.setUnitAttribute("Antibody", config[6], config[9], 9, config[10]);
+        antibody3Spawner.setUnitAttribute("Antibody", "Sniper",config[6], config[9], 9, config[10]);
 
         Parser antibodyParser = new Parser(reader.readGenCode("src/Config/antibody.txt"));
         antibodyParser.addCellsField(cellsField);
@@ -88,13 +88,13 @@ public class MainGame {
         Antibody ab2 = antibody2Spawner.randomSpawnAntibody(1, config[0], config[1]);
         bindingStorage.put(ab2, new HashMap<>());
         cellsField.addUnit(ab2);
-        System.out.println("Spawn normal antibody at " + ab2.getPosition()[0] +"," + ab2.getPosition()[1]);
+        System.out.println("Spawn Great antibody at " + ab2.getPosition()[0] +"," + ab2.getPosition()[1]);
 
         //randomly spawn 1 sniper antibody at first
-        Antibody ab3 = antibody2Spawner.randomSpawnAntibody(1, config[0], config[1]);
+        Antibody ab3 = antibody3Spawner.randomSpawnAntibody(1, config[0], config[1]);
         bindingStorage.put(ab3, new HashMap<>());
         cellsField.addUnit(ab3);
-        System.out.println("Spawn normal antibody at " + ab3.getPosition()[0] +"," + ab3.getPosition()[1]);
+        System.out.println("Spawn Sniper antibody at " + ab3.getPosition()[0] +"," + ab3.getPosition()[1]);
 
 
         System.out.println();
@@ -124,15 +124,15 @@ public class MainGame {
             String type;
             if(randomSpawn < 50) {
                 rv = virusSpawner.randomSpawnVirus(reader.config_rate, config[0], config[1]);
-                type = "normal";
+                type = "Normal";
             }
             else if(randomSpawn < 90) {
                 rv = virus2Spawner.randomSpawnVirus(reader.config_rate, config[0], config[1]);
-                type = "great";
+                type = "Great";
             }
             else {
                 rv = virus3Spawner.randomSpawnVirus(reader.config_rate, config[0], config[1]);
-                type = "furious";
+                type = "Furious";
             }
             if(rv != null) {
                 bindingStorage.put(rv, new HashMap<>());
@@ -145,11 +145,28 @@ public class MainGame {
             for(Host host : hl){
                 if(cellsField.isAlive(host)) {
                     if (host.getClass().getSimpleName().equals("Virus")) {
-                        virusParser.addUnit(host, bindingStorage.get(host));
-                        virusParser.eval();
+                        if(host.getSpecies().equals("Normal")) {
+                            virusParser.addUnit(host, bindingStorage.get(host));
+                            virusParser.eval();
+                        }else if(host.getSpecies().equals("Great")) {
+                            virus2Parser.addUnit(host, bindingStorage.get(host));
+                            virus2Parser.eval();
+                        }else{
+                            virus3Parser.addUnit(host, bindingStorage.get(host));
+                            virus3Parser.eval();
+                        }
                     } else {
-                        antibodyParser.addUnit(host, bindingStorage.get(host));
-                        antibodyParser.eval();
+                        if(host.getSpecies().equals("Normal")) {
+                            antibodyParser.addUnit(host, bindingStorage.get(host));
+                            antibodyParser.eval();
+                        }else if(host.getSpecies().equals("Great")) {
+                            antibody2Parser.addUnit(host, bindingStorage.get(host));
+                            antibody2Parser.eval();
+                        }else {
+                            antibody3Parser.addUnit(host, bindingStorage.get(host));
+                            antibody3Parser.eval();
+                        }
+
                     }
                     System.out.println("--------------------------------------------");
                 }
@@ -163,15 +180,15 @@ public class MainGame {
                 Virus vr;
                 if(randomMutant < 45) {
                     vr = virusSpawner.SpawnVirus(1, p[0], p[1]);
-                    System.out.println("Spawn normal mutant virus at " + p[0] +"," + p[1] + "!");
+                    System.out.println("Spawn Normal mutant virus at " + p[0] +"," + p[1] + "!");
                 }
                 else if(randomMutant < 85) {
                     vr = virus2Spawner.SpawnVirus(1, p[0], p[1]);
-                    System.out.println("Spawn great mutant virus at " + p[0] +"," + p[1] + "!");
+                    System.out.println("Spawn Great mutant virus at " + p[0] +"," + p[1] + "!");
                 }
                 else {
                     vr = virus3Spawner.SpawnVirus(1, p[0], p[1]);
-                    System.out.println("Spawn furious mutant virus at " + p[0] +"," + p[1] + "!");
+                    System.out.println("Spawn Furious mutant virus at " + p[0] +"," + p[1] + "!");
                 }
                 bindingStorage.put(vr, new HashMap<>());
                 cellsField.addUnit(vr);
