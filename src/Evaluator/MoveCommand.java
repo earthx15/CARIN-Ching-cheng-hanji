@@ -6,7 +6,7 @@ import Game.CellsField;
 import java.util.Map;
 
 public class MoveCommand implements Statement {
-    public static StringBuilder testOut = new StringBuilder();
+    public static StringBuilder testOut;
 
     private Direction direction;
 
@@ -16,6 +16,7 @@ public class MoveCommand implements Statement {
 
     @Override
     public void eval(Map<String, Integer> binding, Host unit, CellsField cf) throws EvalError {
+        testOut = new StringBuilder();
         if(unit == null) throw new EvalError("Missing Host unit");
 
         int dst_i = unit.getPosition()[0];
@@ -43,11 +44,11 @@ public class MoveCommand implements Statement {
             dst_j -= 1;
         }
         if(cf.checkUnit(dst_i, dst_j).equals("empty") && !cf.checkUnit(dst_i, dst_j).equals("out")) {
-            testOut.append(unit.getClass().getSimpleName()).append(" from ").append(unit.getPosition()[0]).append(",").append(unit.getPosition()[1])
+            testOut.append(unit.getSpecies() + " " + unit.getClass().getSimpleName()).append(" from ").append(unit.getPosition()[0]).append(",").append(unit.getPosition()[1])
                     .append(" move to ").append(dst_i).append(",").append(dst_j).append("\n");
             cf.moveUnit(dst_i, dst_j, unit);
         }else {
-            testOut.append(unit.getClass().getSimpleName()).append(" from ").append(unit.getPosition()[0]).append(",").append(unit.getPosition()[1])
+            testOut.append(unit.getSpecies() + " " + unit.getClass().getSimpleName()).append(" from ").append(unit.getPosition()[0]).append(",").append(unit.getPosition()[1])
                     .append(" cannot move to ").append(dst_i).append(",").append(dst_j).append("\n");
         }
         System.out.println(testOut);
