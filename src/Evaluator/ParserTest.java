@@ -216,7 +216,7 @@ class ParserTest {
                 shoot up
                 shoot downright
                 shoot down
-                """, new Antibody(10,10,10,10,new int[]{0,0}), new CellsField(3,3));
+                """, new Antibody("Normal" ,10,10,10,10,new int[]{0,0}), new CellsField(3,3));
         psr.eval();
         assertEquals("""
                         Attack : up
@@ -230,7 +230,7 @@ class ParserTest {
     @Test
     void MC_simple1() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Antibody ab = new Antibody(2,2,2, 2, new int[]{3,3});
+        Antibody ab = new Antibody("Normal" ,2,2,2, 2, new int[]{3,3});
         Parser psr = new Parser("""
                  move upleft
                  move left
@@ -238,9 +238,7 @@ class ParserTest {
                 """, ab, cf);
         psr.eval();
         assertEquals("""
-                        Antibody from 3,3 move to 2,2
-                        Antibody from 2,2 move to 2,1
-                        Antibody from 2,1 move to 3,2
+                        Normal Antibody from 2,1 move to 3,2
                         """
                 , MoveCommand.testOut.toString());
         // move upleft      3,3 -> 2,2
@@ -260,8 +258,8 @@ class ParserTest {
     @Test
     void MovingTest_1() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,10,2,10, new int[]{4, 4});
-        Virus v2 = new Virus(10,10,2,10, new int[]{8, 4});
+        Virus v1 = new Virus("Normal" ,10,10,2,10, new int[]{4, 4});
+        Virus v2 = new Virus("Normal" ,10,10,2,10, new int[]{8, 4});
         cf.addUnit(v1);
         cf.addUnit(v2);
         Parser psr = new Parser("""
@@ -284,7 +282,7 @@ class ParserTest {
                         """
                 , AssignmentStatement.testOut.toString());
         assertEquals("""
-                        Virus from 4,4 move to 5,4
+                        Normal Virus from 4,4 move to 5,4
                         """
                 , MoveCommand.testOut.toString());
         // virus move down
@@ -297,8 +295,8 @@ class ParserTest {
     @Test
     void MovingTest_2() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,10,2,10, new int[]{4, 4});
-        Virus v2 = new Virus(10,10,2,10, new int[]{9, 9});
+        Virus v1 = new Virus("Normal" ,10,10,2,10, new int[]{4, 4});
+        Virus v2 = new Virus("Normal" ,10,10,2,10, new int[]{9, 9});
         cf.addUnit(v1);
         cf.addUnit(v2);
         Parser psr = new Parser("""
@@ -321,7 +319,7 @@ class ParserTest {
                         """
                 , AssignmentStatement.testOut.toString());
         assertEquals("""
-                        Virus from 4,4 move to 5,5
+                        Normal Virus from 4,4 move to 5,5
                         """
                 , MoveCommand.testOut.toString());
         // virus move downleft
@@ -334,9 +332,9 @@ class ParserTest {
     @Test
     void moveToClosestVirus() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,10,2,10, new int[]{4, 4});
-        Virus v2 = new Virus(10,10,2,10, new int[]{0, 0});
-        Virus v3 = new Virus(10,10,2,10, new int[]{9, 9});
+        Virus v1 = new Virus("Normal" ,10,10,2,10, new int[]{4, 4});
+        Virus v2 = new Virus("Normal" ,10,10,2,10, new int[]{0, 0});
+        Virus v3 = new Virus("Normal" ,10,10,2,10, new int[]{9, 9});
         cf.addUnit(v1);
         cf.addUnit(v2);
         cf.addUnit(v3);
@@ -360,7 +358,7 @@ class ParserTest {
                         """
                 , AssignmentStatement.testOut.toString());
         assertEquals("""
-                        Virus from 4,4 move to 3,3
+                        Normal Virus from 4,4 move to 3,3
                         """
                 , MoveCommand.testOut.toString());
         // virus move upleft
@@ -373,8 +371,8 @@ class ParserTest {
     @Test
     void moveFromCorner() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,10,2,10, new int[]{0, 0});
-        Virus v2 = new Virus(10,10,2,10, new int[]{9, 0});
+        Virus v1 = new Virus("Normal" ,10,10,2,10, new int[]{0, 0});
+        Virus v2 = new Virus("Normal" ,10,10,2,10, new int[]{9, 0});
         cf.addUnit(v1);
         cf.addUnit(v2);
         Parser psr = new Parser("""
@@ -397,7 +395,7 @@ class ParserTest {
                         """
                 , AssignmentStatement.testOut.toString());
         assertEquals("""
-                        Virus from 0,0 move to 1,0
+                       Normal Virus from 0,0 move to 1,0
                         """
                 , MoveCommand.testOut.toString());
         // virus move down
@@ -410,8 +408,8 @@ class ParserTest {
     @Test
     void virusMoveToAntibody() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,10,2,10, new int[]{3, 4});
-        Antibody a2 = new Antibody(10,10,10, 2, new int[]{6, 1});
+        Virus v1 = new Virus("Normal" ,10,10,2,10, new int[]{3, 4});
+        Antibody a2 = new Antibody("Normal" ,10,10,10, 2, new int[]{6, 1});
         cf.addUnit(v1);
         cf.addUnit(a2);
         Parser psr = new Parser("""
@@ -434,7 +432,7 @@ class ParserTest {
                         """
                 , AssignmentStatement.testOut.toString());
         assertEquals("""
-                        Virus from 3,4 move to 4,3
+                        Normal Virus from 3,4 move to 4,3
                         """
                 , MoveCommand.testOut.toString());
         // virus move downleft
@@ -447,8 +445,8 @@ class ParserTest {
     @Test
     void moveFromCornerButAntibodyMoves() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,10,2,10, new int[]{0, 0});
-        Antibody a2 = new Antibody(10,10,10, 2, new int[]{9, 0});
+        Virus v1 = new Virus("Normal" ,10,10,2,10, new int[]{0, 0});
+        Antibody a2 = new Antibody("Normal" ,10,10,10, 2, new int[]{9, 0});
         cf.addUnit(v1);
         cf.addUnit(a2);
         Parser psr = new Parser("""
@@ -471,7 +469,7 @@ class ParserTest {
                         """
                 , AssignmentStatement.testOut.toString());
         assertEquals("""
-                        Antibody from 9,0 move to 8,0
+                        Normal Antibody from 9,0 move to 8,0
                         """
                 , MoveCommand.testOut.toString());
         // antibody move up
@@ -484,9 +482,9 @@ class ParserTest {
     @Test
     void foundVirusButAntibodyBlock() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,10,2,10, new int[]{0, 0});
-        Antibody a2 = new Antibody(10,10,10, 2, new int[]{9, 0});
-        Antibody a3 = new Antibody(10,10,10, 2, new int[]{8, 0});
+        Virus v1 = new Virus("Normal" ,10,10,2,10, new int[]{0, 0});
+        Antibody a2 = new Antibody("Normal" ,10,10,10, 2, new int[]{9, 0});
+        Antibody a3 = new Antibody("Normal" ,10,10,10, 2, new int[]{8, 0});
         cf.addUnit(v1);
         cf.addUnit(a2);
         cf.addUnit(a3);
@@ -510,7 +508,7 @@ class ParserTest {
                         """
                 , AssignmentStatement.testOut.toString());
         assertEquals("""
-                        Antibody from 9,0 cannot move to 8,0
+                        Normal Antibody from 9,0 cannot move to 8,0
                         """
                 , MoveCommand.testOut.toString());
         // antibody (try to) move up
@@ -523,9 +521,9 @@ class ParserTest {
     @Test
     void nearBy_Virus() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,10,2,10, new int[]{7, 4});
-        Antibody a2 = new Antibody(10,10,10,2, new int[]{2, 4});
-        Antibody a3 = new Antibody(10,10,10, 2, new int[]{8, 8});
+        Virus v1 = new Virus("Normal" ,10,10,2,10, new int[]{7, 4});
+        Antibody a2 = new Antibody("Normal" ,10,10,10,2, new int[]{2, 4});
+        Antibody a3 = new Antibody("Normal" ,10,10,10, 2, new int[]{8, 8});
         cf.addUnit(v1);
         cf.addUnit(a2);
         cf.addUnit(a3);
@@ -549,7 +547,7 @@ class ParserTest {
                         """
                 , AssignmentStatement.testOut.toString());
         assertEquals("""
-                        Virus from 7,4 move to 6,4
+                        Normal Virus from 7,4 move to 6,4
                         """
                 , MoveCommand.testOut.toString());
         // virus 7,4 -> 6,4
@@ -562,9 +560,9 @@ class ParserTest {
     @Test
     void unfound() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,10,2,10, new int[]{7, 4});
-        Antibody a2 = new Antibody(10,10,10, 2, new int[]{2, 4});
-        Antibody a3 = new Antibody(10,10,10, 2, new int[]{8, 8});
+        Virus v1 = new Virus("Normal" ,10,10,2,10, new int[]{7, 4});
+        Antibody a2 = new Antibody("Normal" ,10,10,10, 2, new int[]{2, 4});
+        Antibody a3 = new Antibody("Normal" ,10,10,10, 2, new int[]{8, 8});
         cf.addUnit(v1);
         cf.addUnit(a2);
         cf.addUnit(a3);
@@ -587,8 +585,7 @@ class ParserTest {
                         nearbyLoc = 0
                         """
                 , AssignmentStatement.testOut.toString());
-        assertEquals(""
-                , MoveCommand.testOut.toString());
+        assertNull(MoveCommand.testOut);
         //virus do not found any antibody
         assertEquals("Virus"
                 , cf.checkUnit(7,4));
@@ -597,8 +594,8 @@ class ParserTest {
     @Test
     void virusAttack() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,3,1,2, new int[]{5, 4});
-        Antibody a2 = new Antibody(10,10,10, 4, new int[]{5, 5});
+        Virus v1 = new Virus("Normal" ,10,3,1,2, new int[]{5, 4});
+        Antibody a2 = new Antibody("Normal" ,10,10,10, 4, new int[]{5, 5});
         cf.addUnit(v1);
         cf.addUnit(a2);
         Parser psr = new Parser("""
@@ -625,8 +622,8 @@ class ParserTest {
     @Test
     void antibodyAttack() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,3,1,2, new int[]{5, 2});
-        Antibody a2 = new Antibody(10,4,10, 4, new int[]{7, 2});
+        Virus v1 = new Virus("Normal" ,10,3,1,2, new int[]{5, 2});
+        Antibody a2 = new Antibody("Normal" ,10,4,10, 4, new int[]{7, 2});
         cf.addUnit(v1);
         cf.addUnit(a2);
         Parser psr = new Parser("""
@@ -653,8 +650,8 @@ class ParserTest {
     @Test
     void moveThenAttack_virus() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,3,1,2, new int[]{5, 2});
-        Antibody a2 = new Antibody(10,4,10, 4, new int[]{7, 2});
+        Virus v1 = new Virus("Normal" ,10,3,1,2, new int[]{5, 2});
+        Antibody a2 = new Antibody("Normal" ,10,4,10, 4, new int[]{7, 2});
         cf.addUnit(v1);
         cf.addUnit(a2);
         Parser psr = new Parser("""
@@ -694,8 +691,8 @@ class ParserTest {
     @Test
     void simpleBattle_1() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,3,1,1, new int[]{1, 1});
-        Antibody a2 = new Antibody(10,2,2, 4, new int[]{5, 5});
+        Virus v1 = new Virus("Normal" ,10,3,1,1, new int[]{1, 1});
+        Antibody a2 = new Antibody("Normal" ,10,2,2, 4, new int[]{5, 5});
         cf.addUnit(v1);
         cf.addUnit(a2);
         Parser psr1 = new Parser("""
@@ -801,8 +798,8 @@ class ParserTest {
     @Test
     void useSameParser() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,3,1,1, new int[]{1, 1});
-        Virus v2 = new Virus(10,4,2, 4, new int[]{5, 5});
+        Virus v1 = new Virus("Normal" ,10,3,1,1, new int[]{1, 1});
+        Virus v2 = new Virus("Normal" ,10,4,2, 4, new int[]{5, 5});
         cf.addUnit(v1);
         cf.addUnit(v2);
         Parser psr = new Parser("""
@@ -829,8 +826,8 @@ class ParserTest {
     @Test
     void useSameParserButDifferentBinding() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,3,1,1, new int[]{1, 1});
-        Virus v2 = new Virus(10,2,2, 4, new int[]{5, 5});
+        Virus v1 = new Virus("Normal" ,10,3,1,1, new int[]{1, 1});
+        Virus v2 = new Virus("Normal" ,10,2,2, 4, new int[]{5, 5});
         cf.addUnit(v1);
         cf.addUnit(v2);
         Map<Host, Map<String, Integer>> bindingStorage = new HashMap<>();
@@ -850,8 +847,8 @@ class ParserTest {
     @Test
     void simpleBattle_2() throws EvalError {
         CellsField cf = new CellsField(10,10);
-        Virus v1 = new Virus(10,3,1,1, new int[]{1, 1});
-        Antibody a2 = new Antibody(10,2,2, 4, new int[]{8, 6});
+        Virus v1 = new Virus("Normal" ,10,3,1,1, new int[]{1, 1});
+        Antibody a2 = new Antibody("Normal" ,10,2,2, 4, new int[]{8, 6});
         cf.addUnit(v1);
         cf.addUnit(a2);
         Map<Host, Map<String, Integer>> bindingStorage = new HashMap<>();
@@ -940,10 +937,7 @@ class ParserTest {
                 psr2.eval();
         }
 
-
-
     }
-
 
 
 }
