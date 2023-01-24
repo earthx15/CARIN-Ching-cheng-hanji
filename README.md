@@ -1,4 +1,4 @@
-# CARIN : Tower Defense Game
+# CARIN : Tower Defense Game :robot: :microbe: 
 (Covid Antibody Response and Infection Neutralization)
 ### Team : Ching-cheng-hanji
 
@@ -20,5 +20,7 @@ Our project has finished only Back-end part, here is the list what you can do
 
 ## Documents (Thai)
 project specifications : https://docs.google.com/document/d/1VOVh5WZBl8MAbt9L9OhJJ6Dvc8LCwnhjmhuDH1oCcaA/edit?usp=sharing
+
 design overview :  https://docs.google.com/document/d/1RolUAtOwK2YWOvBhh3XYvZOmDnDAbahHtZ0bYfa9kfg/edit?usp=sharing
+
 genetic code evaluator design : https://docs.google.com/document/d/1JjUlNLtSlX4YbmN5t5QYcQ2dYZWegDAuYB9lrkWUUK4/edit?usp=sharing
